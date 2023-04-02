@@ -1,0 +1,71 @@
+@import url("normalize.css");
+
+:root {
+  --lightgreen: rgba(0, 200, 0, 0.8);
+  --darkgreen: rgba(0, 100, 0, 0.8);
+  --lightyellow: rgba(255, 255, 0, 0.8);
+  --darkyellow: rgba(220, 220, 0, 0.7);
+  --white: rgba(255, 255, 255, 0.8);
+  --grey: rgba(255, 255, 255, 0.3);
+}
+
+header {
+  height: 15vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.gameboard {
+  background-color: grey;
+  width: 450px;
+  height: 450px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 5px;
+  grid-template-areas:
+    "one two three"
+    "four five six"
+    "seven eight nine";
+}
+.gameboard div {
+  background-color: var(--lightgreen);
+}
+.one {
+  grid-area: one;
+}
+.two {
+  grid-area: two;
+}
+.three {
+  grid-area: three;
+}
+.four {
+  grid-area: four;
+}
+.five {
+  grid-area: five;
+}
+.six {
+  grid-area: six;
+}
+.seven {
+  grid-area: seven;
+}
+.eight {
+  grid-area: eight;
+}
+.nine {
+  grid-area: nine;
+}
+
+footer {
+  text-align: center;
+}
