@@ -9,63 +9,42 @@
   --grey: rgba(255, 255, 255, 0.3);
 }
 
-header {
-  height: 15vh;
+body {
+  background-color: var(--lightgreen);
+  font-family: "Lora", serif;
+  height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+}
+
+header {
+  height: 5vh;
+  color: var(--white);
+  font-size: 2rem;
+  text-align: center;
 }
 
 main {
-  height: 80vh;
+  height: 85vh;
+  padding: 50px 0;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .gameboard {
-  background-color: grey;
+  background-color: var(--lightyellow);
   width: 450px;
   height: 450px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   gap: 5px;
-  grid-template-areas:
-    "one two three"
-    "four five six"
-    "seven eight nine";
 }
-.gameboard div {
-  background-color: var(--lightgreen);
-}
-.one {
-  grid-area: one;
-}
-.two {
-  grid-area: two;
-}
-.three {
-  grid-area: three;
-}
-.four {
-  grid-area: four;
-}
-.five {
-  grid-area: five;
-}
-.six {
-  grid-area: six;
-}
-.seven {
-  grid-area: seven;
-}
-.eight {
-  grid-area: eight;
-}
-.nine {
-  grid-area: nine;
+.tile {
+  background-color: var(--darkgreen);
 }
 
 footer {
+  height: 5vh;
   text-align: center;
 }
