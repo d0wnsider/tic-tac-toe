@@ -1,7 +1,11 @@
 // * module(IIFE) for for single purpose functions/ factories for multiples like players
 //* gameboard
 //TODO
-const gameboard = { tile: ["", "", "", "", "", "", "", "", ""] };
+const gameboard = (() => {
+  const tile = ["", "", "", "", "", "", "", "", ""];
+  return { tile };
+})();
+
 // adding event listener
 const tile = document.querySelectorAll(".tile");
 tile.forEach((tile) => {
