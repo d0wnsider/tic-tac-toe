@@ -6,14 +6,6 @@ const gameboard = (() => {
   return { tile };
 })();
 
-// adding event listener
-const tile = document.querySelectorAll(".tile");
-tile.forEach((tile) => {
-  tile.addEventListener("click", (e) => {
-    tile.textContent = player1.getSymbol();
-  });
-});
-
 //* players
 // what should players do?
 const Player = (name, symbol) => {
@@ -26,11 +18,24 @@ const player1 = Player("Player 1", "X");
 const player2 = Player("Player 2", "O");
 
 //TODO
-const display = () => {};
+const display = (() => {
+  // adding event listener
+  const tile = document.querySelectorAll(".tile");
+  tile.forEach((tile, idx) => {
+    tile.addEventListener("click", (e) => {
+      tile.textContent = player1.getSymbol();
+      gameboard.tile[idx] = player1.getSymbol();
+    });
+  });
+  return {};
+})();
 
 //TODO gameflow sequence
-const game = () => {};
+const game = (() => {
+  display;
+  return { display };
+})();
 
 //* starts the game
 //TODO starts the game when start button is clicked
-game();
+game;
