@@ -1,41 +1,50 @@
 // * module(IIFE) for for single purpose functions/ factories for multiples like players
 //* gameboard
 //TODO
-const gameboard = (() => {
+const Gameboard = (() => {
   const tile = ["", "", "", "", "", "", "", "", ""];
   return { tile };
 })();
 
 //* players
 // what should players do?
-const Player = (name, symbol) => {
+const Player = (name, symbol, status) => {
   const getName = () => name;
   const getSymbol = () => symbol;
-  return { getName, getSymbol };
+  const getStatus = status;
+  return { getName, getSymbol, getStatus };
 };
-
-const player1 = Player("Player 1", "X");
-const player2 = Player("Player 2", "O");
+// how to remove in global declaration?
+const player1 = Player("Player 1", "X", true);
+const player2 = Player("Player 2", "O", false);
 
 //TODO
 const display = (() => {
   // adding event listener
   const tile = document.querySelectorAll(".tile");
+  const turn = document.querySelector(".turn");
+
   tile.forEach((tile, idx) => {
     tile.addEventListener("click", (e) => {
-      tile.textContent = player1.getSymbol();
-      gameboard.tile[idx] = player1.getSymbol();
+      // how to move in a function?
+      if (player1.getStatus === true) {
+        tile.textContent = player1.getSymbol();
+        Gameboard.tile[idx] = player1.getSymbol();
+        player1.getStatus = false;
+        turn.textContent = `${player2.getName()}'s turn`;
+      } else {
+        tile.textContent = player2.getSymbol();
+        Gameboard.tile[idx] = player2.getSymbol();
+        player1.getStatus = true;
+        turn.textContent = `${player1.getName()}'s turn`;
+      }
     });
   });
-  return {};
-})();
-
-//TODO gameflow sequence
-const game = (() => {
-  display;
-  return { display };
 })();
 
 //* starts the game
+//TODO gameflow sequence
 //TODO starts the game when start button is clicked
-game;
+const game = (() => {
+  display;
+})();
