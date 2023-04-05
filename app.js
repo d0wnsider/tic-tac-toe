@@ -39,10 +39,83 @@ const display = (() => {
         turn.textContent = `${player1.getName()}'s turn`;
         tile.removeEventListener("click", hello);
       }
+
+      checkWinner();
     });
   });
+  return { turn };
 })();
 
+//* check's the winner or draw
+const checkWinner = () => {
+  if (
+    (Gameboard.tile[0] === "X" &&
+      Gameboard.tile[1] === "X" &&
+      Gameboard.tile[2] === "X") ||
+    (Gameboard.tile[0] === "X" &&
+      Gameboard.tile[3] === "X" &&
+      Gameboard.tile[6] === "X") ||
+    (Gameboard.tile[0] === "X" &&
+      Gameboard.tile[4] === "X" &&
+      Gameboard.tile[8] === "X") ||
+    (Gameboard.tile[3] === "X" &&
+      Gameboard.tile[4] === "X" &&
+      Gameboard.tile[5] === "X") ||
+    (Gameboard.tile[1] === "X" &&
+      Gameboard.tile[4] === "X" &&
+      Gameboard.tile[7] === "X") ||
+    (Gameboard.tile[2] === "X" &&
+      Gameboard.tile[4] === "X" &&
+      Gameboard.tile[6] === "X") ||
+    (Gameboard.tile[6] === "X" &&
+      Gameboard.tile[7] === "X" &&
+      Gameboard.tile[8] === "X") ||
+    (Gameboard.tile[2] === "X" &&
+      Gameboard.tile[5] === "X" &&
+      Gameboard.tile[8] === "X")
+  ) {
+    display.turn.textContent = `Player 1 has won!`;
+    // then game is over!
+    // remove listener for the whole gameboard? then display
+  }
+  if (
+    (Gameboard.tile[0] === "O" &&
+      Gameboard.tile[1] === "O" &&
+      Gameboard.tile[2] === "O") ||
+    (Gameboard.tile[0] === "O" &&
+      Gameboard.tile[3] === "O" &&
+      Gameboard.tile[6] === "O") ||
+    (Gameboard.tile[0] === "O" &&
+      Gameboard.tile[4] === "O" &&
+      Gameboard.tile[8] === "O") ||
+    (Gameboard.tile[3] === "O" &&
+      Gameboard.tile[4] === "O" &&
+      Gameboard.tile[5] === "O") ||
+    (Gameboard.tile[1] === "O" &&
+      Gameboard.tile[4] === "O" &&
+      Gameboard.tile[7] === "O") ||
+    (Gameboard.tile[2] === "O" &&
+      Gameboard.tile[4] === "O" &&
+      Gameboard.tile[6] === "O") ||
+    (Gameboard.tile[6] === "O" &&
+      Gameboard.tile[7] === "O" &&
+      Gameboard.tile[8] === "O") ||
+    (Gameboard.tile[2] === "O" &&
+      Gameboard.tile[5] === "O" &&
+      Gameboard.tile[8] === "O")
+  ) {
+    display.turn.textContent = `Player 2 has won!`;
+  }
+  draw();
+};
+
+const draw = () => {
+  const isFull = Gameboard.tile.every((tile) => Boolean(tile));
+  console.log(isFull);
+  if (isFull) {
+    display.turn.textContent = `It's a draw!`;
+  }
+};
 //* starts the game
 //TODO gameflow sequence
 //TODO starts the game when start button is clicked
