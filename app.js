@@ -23,20 +23,21 @@ const display = (() => {
   // adding event listener
   const tile = document.querySelectorAll(".tile");
   const turn = document.querySelector(".turn");
-
   tile.forEach((tile, idx) => {
-    tile.addEventListener("click", (e) => {
+    tile.addEventListener("click", function hello(e) {
       // how to move in a function?
       if (player1.getStatus === true) {
         tile.textContent = player1.getSymbol();
         Gameboard.tile[idx] = player1.getSymbol();
         player1.getStatus = false;
         turn.textContent = `${player2.getName()}'s turn`;
+        tile.removeEventListener("click", hello);
       } else {
         tile.textContent = player2.getSymbol();
         Gameboard.tile[idx] = player2.getSymbol();
         player1.getStatus = true;
         turn.textContent = `${player1.getName()}'s turn`;
+        tile.removeEventListener("click", hello);
       }
     });
   });
