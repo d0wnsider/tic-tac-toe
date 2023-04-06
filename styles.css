@@ -36,7 +36,7 @@ main {
   background-color: var(--lightyellow);
   width: 450px;
   height: 450px;
-  display: grid;
+  display: none;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   gap: 5px;
@@ -48,6 +48,7 @@ main {
   text-align: center;
   padding: 20px;
   font-size: 2rem;
+  display: none;
 }
 .x {
   background: url(./img/close.png);
@@ -60,15 +61,21 @@ main {
   background-size: cover;
 }
 .restart {
+  display: none;
+}
+.restart,
+.start {
   padding: 1rem;
   border-style: none;
   border-radius: 10px;
   background-color: var(--lightyellow);
 }
-.restart:hover {
+.restart:hover,
+.start:hover {
   background-color: var(--darkyellow);
   transform: scale(1.1);
 }
+
 footer {
   height: 5vh;
   padding-top: 50px;

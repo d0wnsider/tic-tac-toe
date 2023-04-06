@@ -1,6 +1,27 @@
 // * module(IIFE) for for single purpose functions/ factories for multiples like players
 //* gameboard
 //TODO
+const startGame = () => {
+  const gameboard = document.querySelector(".gameboard");
+  const turn = document.querySelector(".turn");
+  const restart = document.querySelector(".restart");
+  const start = document.querySelector(".start");
+
+  gameboard.style.display = "grid";
+  turn.style.display = "block";
+  restart.style.display = "block";
+  start.style.display = "none";
+};
+
+//* starts the game
+//TODO gameflow sequence
+//TODO starts the game when start button is clicked
+const startG = document.querySelector(".start");
+
+startG.addEventListener("click", (e) => {
+  startGame();
+});
+
 const Gameboard = (() => {
   const tile = ["", "", "", "", "", "", "", "", ""];
   return { tile };
@@ -53,7 +74,7 @@ const display = (() => {
   addListeners();
 
   //* restart button
-  const restart = document.querySelector("button");
+  const restart = document.querySelector(".restart");
   restart.addEventListener("click", () => {
     const tile = document.querySelectorAll(".tile");
     const turn = document.querySelector(".turn");
@@ -145,10 +166,3 @@ const draw = () => {
     display.turn.textContent = `It's a draw!`;
   }
 };
-
-//* starts the game
-//TODO gameflow sequence
-//TODO starts the game when start button is clicked
-const game = (() => {
-  display;
-})();
