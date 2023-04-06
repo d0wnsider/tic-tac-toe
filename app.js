@@ -24,28 +24,50 @@ const display = (() => {
   // adding event listener
   const tile = document.querySelectorAll(".tile");
   const turn = document.querySelector(".turn");
-  tile.forEach((tile, idx) => {
-    tile.addEventListener("click", function hello(e) {
-      // how to move in a function?
-      if (player1.getWin === "win") {
-        tile.textContent = "";
-      } else if (player2.getWin === "win") {
-        tile.textContent = "";
-      } else if (player1.getStatus === true && player1.getWin !== "win") {
-        tile.classList.add("x");
-        Gameboard.tile[idx] = player1.getSymbol();
-        player1.getStatus = false;
-        turn.textContent = `${player2.getName()}'s turn`;
-        tile.removeEventListener("click", hello);
-      } else {
-        tile.classList.add("o");
-        Gameboard.tile[idx] = player2.getSymbol();
-        player1.getStatus = true;
-        turn.textContent = `${player1.getName()}'s turn`;
-        tile.removeEventListener("click", hello);
-      }
 
-      checkWinner();
+  function addListeners() {
+    tile.forEach((tile, idx) => {
+      tile.addEventListener("click", function hello(e) {
+        // how to move in a function?
+        if (player1.getWin === "win") {
+          tile.textContent = "";
+        } else if (player2.getWin === "win") {
+          tile.textContent = "";
+        } else if (player1.getStatus === true && player1.getWin !== "win") {
+          tile.classList.add("x");
+          Gameboard.tile[idx] = player1.getSymbol();
+          player1.getStatus = false;
+          turn.textContent = `${player2.getName()}'s turn`;
+        } else {
+          tile.classList.add("o");
+          Gameboard.tile[idx] = player2.getSymbol();
+          player1.getStatus = true;
+          turn.textContent = `${player1.getName()}'s turn`;
+        }
+
+        checkWinner();
+      });
+    });
+  }
+
+  addListeners();
+
+  //* restart button
+  const restart = document.querySelector("button");
+  restart.addEventListener("click", () => {
+    const tile = document.querySelectorAll(".tile");
+    const turn = document.querySelector(".turn");
+
+    // clear
+    tile.forEach((tile, idx) => {
+      tile.classList.remove("x");
+      tile.classList.remove("o");
+      Gameboard.tile[idx] = "";
+      player1.getStatus = true;
+      player2.getStatus = false;
+      player1.getWin = false;
+      player2.getWin = false;
+      turn.textContent = `${player1.getName()}'s turn`;
     });
   });
 
@@ -123,6 +145,7 @@ const draw = () => {
     display.turn.textContent = `It's a draw!`;
   }
 };
+
 //* starts the game
 //TODO gameflow sequence
 //TODO starts the game when start button is clicked

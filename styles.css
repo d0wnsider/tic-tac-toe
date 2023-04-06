@@ -26,12 +26,11 @@ header {
 
 main {
   height: 85vh;
-  padding: 0 0;
+  padding: 20px 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 50px;
 }
 .gameboard {
   background-color: var(--lightyellow);
@@ -48,6 +47,7 @@ main {
 .turn {
   text-align: center;
   padding: 20px;
+  font-size: 2rem;
 }
 .x {
   background: url(./img/close.png);
@@ -58,6 +58,16 @@ main {
   background: url(./img/o.png);
   background-repeat: no-repeat;
   background-size: cover;
+}
+.restart {
+  padding: 1rem;
+  border-style: none;
+  border-radius: 10px;
+  background-color: var(--lightyellow);
+}
+.restart:hover {
+  background-color: var(--darkyellow);
+  transform: scale(1.1);
 }
 footer {
   height: 5vh;
