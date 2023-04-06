@@ -1,12 +1,8 @@
-// * module(IIFE) for for single purpose functions/ factories for multiples like players
-//* gameboard
-//TODO
 const startGame = () => {
   const gameboard = document.querySelector(".gameboard");
   const turn = document.querySelector(".turn");
   const restart = document.querySelector(".restart");
   const start = document.querySelector(".start");
-
   gameboard.style.display = "grid";
   turn.style.display = "block";
   restart.style.display = "block";
@@ -14,21 +10,17 @@ const startGame = () => {
 };
 
 //* starts the game
-//TODO gameflow sequence
-//TODO starts the game when start button is clicked
 const startG = document.querySelector(".start");
-
 startG.addEventListener("click", (e) => {
   startGame();
 });
-
+//*gameboard
 const Gameboard = (() => {
   const tile = ["", "", "", "", "", "", "", "", ""];
   return { tile };
 })();
 
 //* players
-// what should players do?
 const Player = (name, symbol, status) => {
   const getName = () => name;
   const getSymbol = () => symbol;
@@ -36,49 +28,48 @@ const Player = (name, symbol, status) => {
   const getWin = "";
   return { getName, getSymbol, getStatus, getWin };
 };
-// how to remove in global declaration?
 const player1 = Player("Player 1", "X", true);
 const player2 = Player("Player 2", "O", false);
 
-//TODO
+const draw = () => {
+  const isFull = Gameboard.tile.every((tile) => Boolean(tile));
+  if (isFull) {
+    display.turn.textContent = `It's a draw!`;
+  }
+};
+
 const display = (() => {
   // adding event listener
   const tile = document.querySelectorAll(".tile");
   const turn = document.querySelector(".turn");
 
-  function addListeners() {
-    tile.forEach((tile, idx) => {
-      tile.addEventListener("click", function hello(e) {
-        // how to move in a function?
-        if (player1.getWin === "win") {
-          tile.textContent = "";
-        } else if (player2.getWin === "win") {
-          tile.textContent = "";
-        } else if (player1.getStatus === true && player1.getWin !== "win") {
-          tile.classList.add("x");
-          Gameboard.tile[idx] = player1.getSymbol();
-          player1.getStatus = false;
-          turn.textContent = `${player2.getName()}'s turn`;
-        } else {
-          tile.classList.add("o");
-          Gameboard.tile[idx] = player2.getSymbol();
-          player1.getStatus = true;
-          turn.textContent = `${player1.getName()}'s turn`;
-        }
+  tile.forEach((tile, idx) => {
+    tile.addEventListener("click", function hello(e) {
+      // how to move in a function?
+      if (player1.getWin === "win") {
+        tile.textContent = "";
+      } else if (player2.getWin === "win") {
+        tile.textContent = "";
+      } else if (player1.getStatus === true && player1.getWin !== "win") {
+        tile.classList.add("x");
+        Gameboard.tile[idx] = player1.getSymbol();
+        player1.getStatus = false;
+        turn.textContent = `${player2.getName()}'s turn`;
+      } else {
+        tile.classList.add("o");
+        Gameboard.tile[idx] = player2.getSymbol();
+        player1.getStatus = true;
+        turn.textContent = `${player1.getName()}'s turn`;
+      }
 
-        checkWinner();
-      });
+      checkWinner();
     });
-  }
-
-  addListeners();
-
+  });
   //* restart button
   const restart = document.querySelector(".restart");
   restart.addEventListener("click", () => {
     const tile = document.querySelectorAll(".tile");
     const turn = document.querySelector(".turn");
-
     // clear
     tile.forEach((tile, idx) => {
       tile.classList.remove("x");
@@ -91,11 +82,9 @@ const display = (() => {
       turn.textContent = `${player1.getName()}'s turn`;
     });
   });
-
   return { turn };
 })();
 
-//* check's the winner or draw
 const checkWinner = () => {
   if (
     (Gameboard.tile[0] === "X" &&
@@ -125,8 +114,6 @@ const checkWinner = () => {
   ) {
     display.turn.textContent = `Player 1 has won!`;
     player1.getWin = "win";
-    // then game is over!
-    // remove listener for the whole gameboard? then display
   }
   if (
     (Gameboard.tile[0] === "O" &&
@@ -158,11 +145,4 @@ const checkWinner = () => {
     player2.getWin = "win";
   }
   draw();
-};
-
-const draw = () => {
-  const isFull = Gameboard.tile.every((tile) => Boolean(tile));
-  if (isFull) {
-    display.turn.textContent = `It's a draw!`;
-  }
 };
