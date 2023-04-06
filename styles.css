@@ -49,7 +49,16 @@ main {
   text-align: center;
   padding: 20px;
 }
-
+.x {
+  background: url(./img/close.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.o {
+  background: url(./img/o.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 footer {
   height: 5vh;
   padding-top: 50px;

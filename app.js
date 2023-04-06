@@ -29,17 +29,16 @@ const display = (() => {
       // how to move in a function?
       if (player1.getWin === "win") {
         tile.textContent = "";
-        // tile.removeEventListener("click", hello);
       } else if (player2.getWin === "win") {
         tile.textContent = "";
       } else if (player1.getStatus === true && player1.getWin !== "win") {
-        tile.textContent = player1.getSymbol();
+        tile.classList.add("x");
         Gameboard.tile[idx] = player1.getSymbol();
         player1.getStatus = false;
         turn.textContent = `${player2.getName()}'s turn`;
         tile.removeEventListener("click", hello);
       } else {
-        tile.textContent = player2.getSymbol();
+        tile.classList.add("o");
         Gameboard.tile[idx] = player2.getSymbol();
         player1.getStatus = true;
         turn.textContent = `${player1.getName()}'s turn`;
