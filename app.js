@@ -12,7 +12,8 @@ const Player = (name, symbol, status) => {
   const getName = () => name;
   const getSymbol = () => symbol;
   const getStatus = status;
-  return { getName, getSymbol, getStatus };
+  const getWin = "";
+  return { getName, getSymbol, getStatus, getWin };
 };
 // how to remove in global declaration?
 const player1 = Player("Player 1", "X", true);
@@ -26,7 +27,12 @@ const display = (() => {
   tile.forEach((tile, idx) => {
     tile.addEventListener("click", function hello(e) {
       // how to move in a function?
-      if (player1.getStatus === true) {
+      if (player1.getWin === "win") {
+        tile.textContent = "";
+        // tile.removeEventListener("click", hello);
+      } else if (player2.getWin === "win") {
+        tile.textContent = "";
+      } else if (player1.getStatus === true && player1.getWin !== "win") {
         tile.textContent = player1.getSymbol();
         Gameboard.tile[idx] = player1.getSymbol();
         player1.getStatus = false;
@@ -43,6 +49,7 @@ const display = (() => {
       checkWinner();
     });
   });
+
   return { turn };
 })();
 
@@ -75,6 +82,7 @@ const checkWinner = () => {
       Gameboard.tile[8] === "X")
   ) {
     display.turn.textContent = `Player 1 has won!`;
+    player1.getWin = "win";
     // then game is over!
     // remove listener for the whole gameboard? then display
   }
@@ -105,13 +113,13 @@ const checkWinner = () => {
       Gameboard.tile[8] === "O")
   ) {
     display.turn.textContent = `Player 2 has won!`;
+    player2.getWin = "win";
   }
   draw();
 };
 
 const draw = () => {
   const isFull = Gameboard.tile.every((tile) => Boolean(tile));
-  console.log(isFull);
   if (isFull) {
     display.turn.textContent = `It's a draw!`;
   }
